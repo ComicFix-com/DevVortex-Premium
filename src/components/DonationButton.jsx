@@ -41,6 +41,9 @@ const DonationButton = () => {
             Donate ₹1000 (We'll add ₹10000) <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         </div>
+        <p className="text-sm text-gray-500 mt-4">
+          Every 10 donations help support open source projects, teams, and contributors!
+        </p>
       </DialogContent>
     </Dialog>
   );
