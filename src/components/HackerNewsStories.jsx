@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import StoryCard from './StoryCard';
 import StoryCardSkeleton from './StoryCardSkeleton';
+import PremiumIcon from './PremiumIcon';
 import gsap from 'gsap';
 
 const fetchStories = async (searchTerm = '') => {
@@ -40,21 +41,24 @@ const HackerNewsStories = () => {
     refetch();
   };
 
-  if (error) return <div>Error: {error.message}</div>;
+  if (error) return <div className="text-red-500">Error: {error.message}</div>;
 
   return (
-    <div>
-      <div className="mb-4 flex gap-2">
+    <div className="space-y-8">
+      <div className="flex items-center space-x-4 bg-gray-800 p-4 rounded-lg shadow-lg">
+        <PremiumIcon icon="SearchIcon" className="w-6 h-6 text-purple-400" />
         <Input
           type="text"
-          placeholder="Search stories..."
+          placeholder="Search premium stories..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="flex-grow"
+          className="flex-grow bg-gray-700 text-white border-purple-500 focus:ring-purple-400"
         />
-        <Button onClick={handleSearch}>Search</Button>
+        <Button onClick={handleSearch} className="bg-purple-600 hover:bg-purple-700">
+          Search
+        </Button>
       </div>
-      <div ref={storiesRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div ref={storiesRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {isLoading
           ? [...Array(9)].map((_, index) => <StoryCardSkeleton key={index} />)
           : data?.hits.map((story) => <StoryCard key={story.objectID} story={story} />)
