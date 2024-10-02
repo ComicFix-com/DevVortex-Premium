@@ -5,12 +5,12 @@ import { ArrowUpIcon, ExternalLinkIcon } from 'lucide-react';
 
 const StoryCard = ({ story }) => {
   return (
-    <Card className="h-full flex flex-col">
+    <Card className="h-full flex flex-col dark:bg-gray-800 dark:text-white transition-colors duration-300">
       <CardHeader>
         <CardTitle className="text-lg">{story.title}</CardTitle>
       </CardHeader>
       <CardContent className="flex-grow">
-        <p className="text-sm text-gray-500">By {story.author}</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400">By {story.author}</p>
       </CardContent>
       <CardFooter className="flex justify-between items-center">
         <div className="flex items-center">

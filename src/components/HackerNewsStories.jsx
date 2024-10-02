@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import StoryCard from './StoryCard';
 import StoryCardSkeleton from './StoryCardSkeleton';
+import gsap from 'gsap';
 
 const fetchStories = async (searchTerm = '') => {
   const response = await fetch(`https://hn.algolia.com/api/v1/search?query=${searchTerm}&hitsPerPage=10000`);
@@ -20,6 +21,20 @@ const HackerNewsStories = () => {
     queryFn: () => fetchStories(searchTerm),
     enabled: false,
   });
+
+  const storiesRef = useRef(null);
+
+  useEffect(() => {
+    if (data && !isLoading) {
+      gsap.from(storiesRef.current.children, {
+        opacity: 0,
+        y: 50,
+        stagger: 0.1,
+        duration: 0.5,
+        ease: 'power3.out'
+      });
+    }
+  }, [data, isLoading]);
 
   const handleSearch = () => {
     refetch();
@@ -39,19 +54,12 @@ const HackerNewsStories = () => {
         />
         <Button onClick={handleSearch}>Search</Button>
       </div>
-      {isLoading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {[...Array(9)].map((_, index) => (
-            <StoryCardSkeleton key={index} />
-          ))}
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {data?.hits.map((story) => (
-            <StoryCard key={story.objectID} story={story} />
-          ))}
-        </div>
-      )}
+      <div ref={storiesRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {isLoading
+          ? [...Array(9)].map((_, index) => <StoryCardSkeleton key={index} />)
+          : data?.hits.map((story) => <StoryCard key={story.objectID} story={story} />)
+        }
+      </div>
     </div>
   );
 };
