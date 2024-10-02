@@ -1,5 +1,10 @@
 import React from 'react';
 import PremiumIcon from './PremiumIcon';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import TermsContent from './TermsContent';
+import PrivacyContent from './PrivacyContent';
+import ContactContent from './ContactContent';
 
 const PremiumFooter = () => {
   return (
@@ -10,9 +15,39 @@ const PremiumFooter = () => {
           <span>Premium Quality News</span>
         </div>
         <div className="flex items-center space-x-4">
-          <a href="#" className="hover:text-gray-300 transition-colors">Terms</a>
-          <a href="#" className="hover:text-gray-300 transition-colors">Privacy</a>
-          <a href="#" className="hover:text-gray-300 transition-colors">Contact</a>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="link" className="text-white hover:text-gray-300 transition-colors">Terms</Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Terms of Service</DialogTitle>
+              </DialogHeader>
+              <TermsContent />
+            </DialogContent>
+          </Dialog>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="link" className="text-white hover:text-gray-300 transition-colors">Privacy</Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Privacy Policy</DialogTitle>
+              </DialogHeader>
+              <PrivacyContent />
+            </DialogContent>
+          </Dialog>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="link" className="text-white hover:text-gray-300 transition-colors">Contact</Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Contact Us</DialogTitle>
+              </DialogHeader>
+              <ContactContent />
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
     </footer>
