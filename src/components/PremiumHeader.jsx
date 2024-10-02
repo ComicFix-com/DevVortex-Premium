@@ -8,7 +8,7 @@ const PremiumHeader = ({ theme, setTheme }) => {
   return (
     <header className="bg-gradient-to-r from-purple-800 to-indigo-800 text-white p-6 flex justify-between items-center">
       <div className="flex items-center space-x-2">
-        <PremiumIcon icon="CubeTransparentIcon" className="w-8 h-8" />
+        <PremiumIcon icon="CubeIcon" className="w-8 h-8" />
         <h1 className="text-3xl font-bold">DevVortex Premium</h1>
       </div>
       <div className="flex items-center space-x-4">
